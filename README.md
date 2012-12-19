@@ -16,3 +16,4 @@ A very simple Javascript engine to determine whether a point is within a polygon
 * It does not bother with 1/-1 latitude/longitude boundaries
 * It was written in about 2 hours
 * One of those hours was with a fever
+* Multipolygon point in polygon may not work right now
