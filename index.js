@@ -5,6 +5,9 @@ var counties = require('./counties.json'),
     
 var util = require('util');
 
+var lon = -122.6764,
+    lat = 45.5165;
+
 var c = new geojson.FeatureCollection(counties);
 var count = 0;
 
@@ -17,11 +20,12 @@ c.on("feature", function (data) {
 
 c.on("done", function () {
   console.log("done import: " + count + " counties");
-  var res = tree.search({ y: 45.5165, x: -122.6764, w: 0, h: 0 });
+  var res = tree.search({ x: lon, y: lat, w: 0, h: 0 });
 
-console.dir(res);
   for (var i = 0; i < res.length; i++) {
-    if (isPointInPoly(res[i].feature.geometry.coordinates[0], [-122.6764, 45.5165])) {
+    var coordinates = res[i].feature.geometry.coordinates;
+    for (var j = 0; j < coordinates.length; j++)
+    if (isPointInPoly(coordinates[j], [lon, lat])) {
       console.log("Point inside polygon: " + res[i].feature.properties.name);
     }
   }
